@@ -11,15 +11,15 @@ enum Symptoms {
   tiredness,
   dryCough,
   achesPains,
-  nasalCongestion,
-  runnyNose,
-  soreThroat,
-  Diarrhea
+//  nasalCongestion,
+//  runnyNose,
+//  soreThroat,
+//  Diarrhea
 }
 
 class User {
   static const String status = '';
-  
+
 
   String typesOfStatus(Status status) {
     switch(status) {
