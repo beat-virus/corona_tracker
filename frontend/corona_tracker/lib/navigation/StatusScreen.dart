@@ -1,3 +1,4 @@
+import 'package:corona_tracker/location/location_tracker.dart';
 import 'package:flutter/material.dart';
 
 class StatusScreen extends StatelessWidget {
@@ -10,14 +11,7 @@ class StatusScreen extends StatelessWidget {
       ),
       body: Center(
         child: Center(
-          child: Text(
-            'Status',
-            textDirection: TextDirection.ltr,
-            style: TextStyle(
-              fontSize: 32,
-              color: Colors.black87,
-            ),
-          ),
+          child: LocationWidget(),
         ),
       ),
     );
