@@ -23,23 +23,23 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@AutoConfigureMockMvc(addFilters = false)
+@TestPropertySource(locations = "classpath:application-test.properties")
 class Spec_PositionsController {
 
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private PositionsRepository positionsRepository;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Nested
-    @SpringBootTest
-    @AutoConfigureMockMvc(addFilters = false)
-    @TestPropertySource(locations = "classpath:application-test.properties")
-    @ExtendWith(SpringExtension.class)
     class Position_Tracking {
-
-        @Autowired
-        private MockMvc mockMvc;
-
-        @Autowired
-        private PositionsRepository positionsRepository;
-
-        @Autowired
-        private ObjectMapper objectMapper;
 
         @BeforeEach
         void setUp() {
@@ -53,7 +53,7 @@ class Spec_PositionsController {
 
             String content = objectMapper.writeValueAsString(dto);
 
-            this.mockMvc.perform(post("/api/v1/positions")
+            mockMvc.perform(post("/api/v1/positions")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(content))
                     .andExpect(status().isOk());
@@ -66,14 +66,14 @@ class Spec_PositionsController {
 
             String content = objectMapper.writeValueAsString(dto);
 
-            ResultActions result = this.mockMvc.perform(post("/api/v1/positions")
+            ResultActions result = mockMvc.perform(post("/api/v1/positions")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(content))
                     .andExpect(status().isOk());
             result.andDo(mvcResult -> {
                 PositionDto savedItem = new ObjectMapper().readValue(mvcResult.getResponse().getContentAsString(), PositionDto.class);
                 assertThat(savedItem.getId()).isNotNull();
-                this.mockMvc.perform(get("/api/v1/positions/")
+                mockMvc.perform(get("/api/v1/positions/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content))
                         .andExpect(status().isOk());

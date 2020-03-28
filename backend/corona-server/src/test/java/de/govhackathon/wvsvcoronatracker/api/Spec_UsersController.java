@@ -3,7 +3,12 @@ package de.govhackathon.wvsvcoronatracker.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.ghwct.service.model.FriendDto;
 import de.ghwct.service.model.UserDto;
+import de.govhackathon.wvsvcoronatracker.model.HealthDataSet;
+import de.govhackathon.wvsvcoronatracker.model.MedicalState;
+import de.govhackathon.wvsvcoronatracker.model.User;
+import de.govhackathon.wvsvcoronatracker.repositories.HealthDataSetRepository;
 import de.govhackathon.wvsvcoronatracker.repositories.PositionsRepository;
+import de.govhackathon.wvsvcoronatracker.repositories.UserRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -23,32 +28,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static de.govhackathon.wvsvcoronatracker.utils.TestDataHelper.createTestUser;
 import static de.govhackathon.wvsvcoronatracker.utils.TestDataHelper.createTestUserDto;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@AutoConfigureMockMvc(addFilters = false)
+@TestPropertySource(locations = "classpath:application-test.properties")
 class Spec_UsersController {
 
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private PositionsRepository positionsRepository;
+
+    @Autowired
+    private HealthDataSetRepository healthDataSetRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Nested
-    @SpringBootTest
-    @AutoConfigureMockMvc(addFilters = false)
-    @TestPropertySource(locations = "classpath:application-test.properties")
-    @ExtendWith(SpringExtension.class)
-    @WithMockUser(username = "Test", roles = "APP_USER")
-    class User_Registration {
-
-        @Autowired
-        private MockMvc mockMvc;
-
-        @Autowired
-        private PositionsRepository positionsRepository;
-
-        @Autowired
-        private ObjectMapper objectMapper;
+    class User_Management {
 
         @BeforeEach
         void setUp() {
             positionsRepository.deleteAll();
+            userRepository.deleteAll();
+            healthDataSetRepository.deleteAll();
         }
 
         @Test
@@ -57,7 +70,7 @@ class Spec_UsersController {
 
             String content = objectMapper.writeValueAsString(dto);
 
-            this.mockMvc.perform(post("/api/v1/users")
+            mockMvc.perform(post("/api/v1/users")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(content))
                     .andExpect(status().isOk());
@@ -68,17 +81,38 @@ class Spec_UsersController {
             UserDto dto = createTestUserDto();
             String content = objectMapper.writeValueAsString(dto);
 
-            ResultActions result = this.mockMvc.perform(post("/api/v1/users")
+            ResultActions result = mockMvc.perform(post("/api/v1/users")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(content))
                     .andExpect(status().isOk());
             result.andDo(mvcResult -> {
                 UserDto savedItem = new ObjectMapper().readValue(mvcResult.getResponse().getContentAsString(), UserDto.class);
                 Assertions.assertThat(savedItem.getToken()).isNotNull();
-                this.mockMvc.perform(get("/api/v1/users/" + savedItem.getToken())
+                mockMvc.perform(get("/api/v1/users/" + savedItem.getToken())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content))
                         .andExpect(status().isOk());
+            });
+        }
+
+        @Test
+        void should_delete_healthdata_with_user_delete() throws Exception {
+            User user = userRepository.save(createTestUser());
+            healthDataSetRepository.save(HealthDataSet.builder()
+                    .medicalState(MedicalState.INFECTED)
+                    .user(user)
+                    .build());
+            healthDataSetRepository.save(HealthDataSet.builder()
+                    .medicalState(MedicalState.INFECTED)
+                    .user(user)
+                    .build());
+            ResultActions result = mockMvc.perform(delete("/api/v1/users/" + user.getToken())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isNoContent());
+            result.andDo(mvcResult -> {
+                Iterable<HealthDataSet> dataSets = healthDataSetRepository.findAll();
+                Assertions.assertThat(dataSets.iterator().hasNext()).isFalse();
             });
         }
 
@@ -92,7 +126,7 @@ class Spec_UsersController {
 
             String content = objectMapper.writeValueAsString(dto);
 
-            this.mockMvc.perform(post("/api/v1/users")
+            mockMvc.perform(post("/api/v1/users")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(content))
                     .andExpect(status().isBadRequest());
