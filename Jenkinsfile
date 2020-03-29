@@ -38,9 +38,9 @@ spec:
       tty: true
       command:
       - cat
-      env:
-      - name: DOCKER_HOST
-        value: tcp://localhost:2375
+      volumeMounts:
+      - mountPath: /var/run/docker.sock
+        name: docker-sock
   volumes:
     - name: docker-sock
       hostPath:
