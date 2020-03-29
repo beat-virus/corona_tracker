@@ -19,7 +19,7 @@ import static de.govhackathon.wvsvcoronatracker.utils.TestDataHelper.createTestU
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class HealthDataSetRepositoryTest {
+public class Spec_HealthDataSetRepository {
 
     private User defaultUser;
 

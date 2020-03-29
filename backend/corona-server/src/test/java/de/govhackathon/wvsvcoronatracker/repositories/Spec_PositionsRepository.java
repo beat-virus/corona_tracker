@@ -1,10 +1,7 @@
 package de.govhackathon.wvsvcoronatracker.repositories;
 
-import com.github.dockerjava.api.model.ContainerPort;
 import de.govhackathon.wvsvcoronatracker.model.Position;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.util.Lists;
-import org.junit.Assert;
 import org.junit.ClassRule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,31 +10,24 @@ import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
-import org.mapstruct.Context;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-@ContextConfiguration(initializers = PositionsRepositoryTest.Initializer.class)
+@ContextConfiguration(initializers = Spec_PositionsRepository.Initializer.class)
 @Testcontainers
-public class PositionsRepositoryTest {
+public class Spec_PositionsRepository {
 
 
     @ClassRule
