@@ -60,7 +60,7 @@ spec:
 				}
 
         stage('Build'){
-          sh 'cd backend && mvn clean install'
+          sh 'docker ps && cd backend && mvn clean install'
         }
 			}
 
