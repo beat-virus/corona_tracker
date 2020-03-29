@@ -1,18 +1,4 @@
 
-# Build Jar
-FROM maven:3.6.3-jdk-8 AS builder
-
-LABEL maintainer=Thomas\ Eberle
-LABEL last_updated=21/03/2020
-
-WORKDIR /coronatracker
-
-COPY ./ /coronatracker
-
-RUN mvn clean install
-
-# Build Executable Image
-
 FROM openjdk:8-jdk
 
 LABEL maintainer=Thomas\ Eberle
@@ -20,7 +6,7 @@ LABEL last_updated=21/03/2020
 
 WORKDIR /coronatracker
 
-COPY --from=builder /coronatracker ./
+COPY target/ ./
 
 EXPOSE 8080
 

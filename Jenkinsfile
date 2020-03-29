@@ -58,7 +58,13 @@ spec:
 				stage('Get Versions'){
 						serverVersion = sh(returnStdout: true, script: 'cd backend && mvn help:evaluate -Dexpression=project.version -q -DforceStdout').trim()
 				}
+
+        stage('Build'){
+          sh 'cd backend && mvn clean install'
+        }
 			}
+
+      
 			
 			container('docker'){
 				stage('Build Docker Image') {
