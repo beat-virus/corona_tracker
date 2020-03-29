@@ -34,7 +34,7 @@ spec:
       - mountPath: /var/run/docker.sock
         name: docker-sock
     - name: maven
-      image: maven:3.6.3-jdk-8
+      image: docker.maustyle.de/java-with-maven:8-jdk
       tty: true
       command:
       - cat
