@@ -3,6 +3,7 @@ package de.govhackathon.wvsvcoronatracker.model;
 import de.govhackathon.wvsvcoronatracker.model.system.AppConfig;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.locationtech.jts.geom.Point;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,13 +40,12 @@ public class Position {
 
     private Boolean valid;
 
-    private BigDecimal latitude;
-
-    private BigDecimal longitude;
+    private Point location;
 
     private BigDecimal altitude;
 
     private Integer accuracy; // meters
+
 
     //TODO add correct jpa annotation
     //private Object network;
