@@ -24,3 +24,18 @@ jobs:
       - name: Bundle iOS App
         run: |
           (cd frontend/corona_tracker/ && flutter build ios --release --no-codesign)
+      - name: Publish Preview
+        run: |
+          (cd frontend/corona_tracker/android && fastlane install_plugins && fastlane alpha)
+          (cd frontend/corona_tracker/ios && fastlane install_plugins && fastlane alpha)
+        if: contains( github.ref, 'develop' ) || contains( github.base_ref, 'develop' )
+      - uses: actions/upload-artifact@v1
+        with:
+          name: IPA
+          path: frontend/corona_tracker/ios/Corona\ Track.ipa
+        if: contains( github.ref, 'develop' ) || contains( github.base_ref, 'develop' )
+      - uses: actions/upload-artifact@v1
+        with:
+          name: AAB
+          path: frontend/corona_tracker/build/app/outputs/bundle/release/app-release.aab
+        if: contains( github.ref, 'develop' ) || contains( github.base_ref, 'develop' )
