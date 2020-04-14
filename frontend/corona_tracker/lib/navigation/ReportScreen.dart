@@ -1,3 +1,4 @@
+import 'package:corona_tracker/navigation/BodyTemperatureScreen.dart';
 import 'package:corona_tracker/navigation/QuestionnaireScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -84,7 +85,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           flexibleSpace:
@@ -95,15 +96,22 @@ class ReportScreenFormState extends State<ReportScreenForm> {
 //                  child: Tab(icon: Icon(Icons.help_outline)),
                     child: Tab(
                         child: Text(
-                  'Fragen',
-                  style: TextStyle(fontSize: 25),
+                          'Köpertemp.',
+                          style: TextStyle(fontSize: 20),
+                        ))),
+                new Container(
+//                  child: Tab(icon: Icon(Icons.help_outline)),
+                    child: Tab(
+                        child: Text(
+                  'Symptome',
+                  style: TextStyle(fontSize: 20),
                 ))),
                 new Container(
 //                  child: Tab(icon: Icon(Icons.help_outline)),
                     child: Tab(
                         child: Text(
                   'Sende Fall',
-                  style: TextStyle(fontSize: 25),
+                  style: TextStyle(fontSize: 20),
                 ))),
               ],
             ),
@@ -112,6 +120,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
         body: TabBarView(
           children: <Widget>[
             //Build a Form widget using the _formKey created above.
+            new BodyTemperatureScreen(),
             new QuestionnaireScreen(),
             Form(
               key: _formKey,
@@ -162,74 +171,74 @@ class ReportScreenFormState extends State<ReportScreenForm> {
                       textField: 'display',
                       valueField: 'value',
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15.0),
-                    ),
-                    Text(
-                        AppLocalizations.of(context)
-                            .ReportScreen_FormSymptomPromptText,
-                        style:
-                            TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
-                    CheckboxListTile(
-                      title: Text(
-                          AppLocalizations.of(context)
-                              .ReportScreen_CheckboxFeverText,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20)),
-                      value: _feverChecked,
-                      onChanged: (value) {
-                        setState(() {
-                          _feverChecked = value;
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity
-                          .leading, //  <-- leading Checkbox
-                    ),
-                    CheckboxListTile(
-                      title: Text(
-                          AppLocalizations.of(context)
-                              .ReportScreen_CheckboxFatigueText,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20)),
-                      value: _tirednessChecked,
-                      onChanged: (value) {
-                        setState(() {
-                          _tirednessChecked = value;
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity
-                          .leading, //  <-- leading Checkbox
-                    ),
-                    CheckboxListTile(
-                      title: Text(
-                          AppLocalizations.of(context)
-                              .ReportScreen_CheckboxDryCoughText,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20)),
-                      value: _dryCoughChecked,
-                      onChanged: (value) {
-                        setState(() {
-                          _dryCoughChecked = value;
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity
-                          .leading, //  <-- leading Checkbox
-                    ),
-                    CheckboxListTile(
-                      title: Text(
-                          AppLocalizations.of(context)
-                              .ReportScreen_CheckboxAchesText,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20)),
-                      value: _achesPainsChecked,
-                      onChanged: (value) {
-                        setState(() {
-                          _achesPainsChecked = value;
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity
-                          .leading, //  <-- leading Checkbox
-                    ),
+//                    Padding(
+//                      padding: const EdgeInsets.symmetric(vertical: 15.0),
+//                    ),
+//                    Text(
+//                        AppLocalizations.of(context)
+//                            .ReportScreen_FormSymptomPromptText,
+//                        style:
+//                            TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+//                    CheckboxListTile(
+//                      title: Text(
+//                          AppLocalizations.of(context)
+//                              .ReportScreen_CheckboxFeverText,
+//                          style: TextStyle(
+//                              fontWeight: FontWeight.bold, fontSize: 20)),
+//                      value: _feverChecked,
+//                      onChanged: (value) {
+//                        setState(() {
+//                          _feverChecked = value;
+//                        });
+//                      },
+//                      controlAffinity: ListTileControlAffinity
+//                          .leading, //  <-- leading Checkbox
+//                    ),
+//                    CheckboxListTile(
+//                      title: Text(
+//                          AppLocalizations.of(context)
+//                              .ReportScreen_CheckboxFatigueText,
+//                          style: TextStyle(
+//                              fontWeight: FontWeight.bold, fontSize: 20)),
+//                      value: _tirednessChecked,
+//                      onChanged: (value) {
+//                        setState(() {
+//                          _tirednessChecked = value;
+//                        });
+//                      },
+//                      controlAffinity: ListTileControlAffinity
+//                          .leading, //  <-- leading Checkbox
+//                    ),
+//                    CheckboxListTile(
+//                      title: Text(
+//                          AppLocalizations.of(context)
+//                              .ReportScreen_CheckboxDryCoughText,
+//                          style: TextStyle(
+//                              fontWeight: FontWeight.bold, fontSize: 20)),
+//                      value: _dryCoughChecked,
+//                      onChanged: (value) {
+//                        setState(() {
+//                          _dryCoughChecked = value;
+//                        });
+//                      },
+//                      controlAffinity: ListTileControlAffinity
+//                          .leading, //  <-- leading Checkbox
+//                    ),
+//                    CheckboxListTile(
+//                      title: Text(
+//                          AppLocalizations.of(context)
+//                              .ReportScreen_CheckboxAchesText,
+//                          style: TextStyle(
+//                              fontWeight: FontWeight.bold, fontSize: 20)),
+//                      value: _achesPainsChecked,
+//                      onChanged: (value) {
+//                        setState(() {
+//                          _achesPainsChecked = value;
+//                        });
+//                      },
+//                      controlAffinity: ListTileControlAffinity
+//                          .leading, //  <-- leading Checkbox
+//                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15.0),
                     ),

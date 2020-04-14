@@ -1,14 +1,16 @@
+import 'package:corona_tracker/navigation/BodyTemperatureScreen.dart';
 import 'package:corona_tracker/navigation/ContactScreen.dart';
 import 'package:corona_tracker/navigation/DummyScreen.dart';
 import 'package:corona_tracker/navigation/HelpScreen.dart';
 import 'package:corona_tracker/navigation/MapScreen.dart';
 import 'package:corona_tracker/navigation/QuestionnaireScreen.dart';
-import 'package:corona_tracker/navigation/SettingsScreen.dart';
+import 'package:corona_tracker/navigation/TestScreen.dart';
 import 'package:corona_tracker/navigation/StatusScreen.dart';
 import 'package:corona_tracker/navigation/ReportScreen.dart';
 import 'package:corona_tracker/i18n/appLocalizations.dart';
-
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 
 
@@ -27,6 +29,7 @@ class _HomeState extends State<Home> {
     ReportScreen(),
     HelpScreen(),
     ContactScreen(),
+//    BodyTemperatureScreen(),
     //SettingsScreen(),
     //DummyScreen()
   ];
@@ -39,42 +42,36 @@ class _HomeState extends State<Home> {
       ),*/
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white70,
         type: BottomNavigationBarType.fixed,
         onTap: onTabTapped,
         currentIndex: _currentIndex, // this will be set when a new tab is tapped
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.people),
+            icon: FaIcon(FontAwesomeIcons.houseUser),
             title: new Text(AppLocalizations.of(context).bottomNavigationBarStatusText),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.map),
+            icon: FaIcon(FontAwesomeIcons.viruses),
             title: new Text(AppLocalizations.of(context).bottomNavigationBarMapText),
           ),
           BottomNavigationBarItem(
-              icon: new Icon(Icons.report),
+            icon: FaIcon(FontAwesomeIcons.temperatureHigh),
               title: new Text(AppLocalizations.of(context).bottomNavigationBarReportText),
           ),
           BottomNavigationBarItem(
-              icon: new Icon(Icons.help),
+              icon: FaIcon(FontAwesomeIcons.hospitalSymbol),
               title: new Text(AppLocalizations.of(context).bottomNavigationBarHelpText)
           ),
           BottomNavigationBarItem(
-              icon: new Icon(Icons.person_add),
+              icon: FaIcon(FontAwesomeIcons.peopleArrows),
               // TODO: i18n
               title: new Text('Freunde')
           ),
 //          BottomNavigationBarItem(
-//              icon: new Icon(Icons.question_answer),
+//              icon: FaIcon(FontAwesomeIcons.biohazard),
 //              // TODO: i18n
-//              title: new Text('Dev_Push')
+//              title: new Text('Dev')
 //          ),
-//          BottomNavigationBarItem(
-//              icon: new Icon(Icons.star),
-//              // TODO: i18n
-//              title: new Text('Fun')
-//          )
         ],
       ),
     );

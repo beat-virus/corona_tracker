@@ -7,10 +7,20 @@ jobs:
     runs-on: [self-hosted, macos]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          clean: false
       - name: Prepare Env
-        run: cp ~/dev/secrets/corona-app/Corona\ FCM.plist frontend/corona_tracker/ios/Runner/GoogleService-Info.plist && cp ~/dev/secrets/corona-app/Corona\ FCM.json frontend/corona_tracker/android/app/google-services.json
-      - name: Bundle APK
-        run: cd frontend/corona_tracker/ && flutter build appbundle --target-platform android-arm,android-arm64,android-x64
-      - name: Bundle IPA
-        run: cd frontend/corona_tracker/ && flutter build ios
+        run: |
+          cp ~/dev/secrets/corona-app/Corona\ FCM.plist frontend/corona_tracker/ios/Runner/GoogleService-Info.plist
+          cp ~/dev/secrets/corona-app/Corona\ FCM.json frontend/corona_tracker/android/app/google-services.json
+          cp ~/dev/secrets/corona-app/Corona\ Playstore.json frontend/corona_tracker/android/playstore-serviceaccount.json
+          cp ~/dev/secrets/corona-app/Corona\ Android\ Keystore.properties frontend/corona_tracker/android/key.properties
+          (cd frontend/corona_tracker/ && ./bin/increment_version_code.sh && flutter clean)
+
+      - name: Bundle Android AppBundle
+        run: |
+          (cd frontend/corona_tracker/ && flutter build appbundle --target-platform android-arm,android-arm64,android-x64)
+      - name: Bundle iOS App
+        run: |
+          (cd frontend/corona_tracker/ && flutter build ios --release --no-codesign)

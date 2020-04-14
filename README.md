@@ -15,9 +15,11 @@ Planned features include:
 
 https://docs.google.com/document/d/18JaJj8r_-Dlp2q7oq3zp3X0w0M_lbIOY3HgEmqJCF-s/edit
 
-![Screenshot 1](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-2-small.png)
-![Screenshot 2](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-5-small.png)
+![Screenshot 1](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-10-small.png)
+![Screenshot 2](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-9-small.png)
 ![Screenshot 3](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-6-small.png)
+![Screenshot 5](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-7-small.png)
+![Screenshot 6](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-8-small.png)
 ![Screenshot 4](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-3-small.png)
 
 ## Frontend

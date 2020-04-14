@@ -1,5 +1,11 @@
 # corona_tracker
 
+- [corona_tracker](#coronatracker)
+  - [Getting Started](#getting-started)
+  - [Generating corona-api](#generating-corona-api)
+    - [Via Maven](#via-maven)
+    - [Manual](#manual)
+  - [Updating icons](#updating-icons)
 A new Flutter application.
 
 ## Getting Started
@@ -17,6 +23,12 @@ samples, guidance on mobile development, and a full API reference.
 
 
 ## Generating corona-api
+
+### Via Maven
+
+Just run `./mvn clean install to update client`
+
+### Manual
 1. Navigate to flutter project root (`/frontend/corona_tracker/`)
 
 2. Make sure you have a config file like `flutter.config.json` in your project root
@@ -27,9 +39,9 @@ samples, guidance on mobile development, and a full API reference.
 	   "browserClient": false
    }
    ```
- 
+
 3. [Convert](https://www.convertjson.com/yaml-to-json.htm) `/backend/corona-components/corona-api/src/main/openapi/openapi.yaml` to JSON and save it anywhere as `swagger.json`
-   
+
 4. Use [openapi-generator-cli](https://github.com/OpenAPITools/openapi-generator) (see ‘DownloadJAR’ section) to run the following command.
 Switch out the path to the jar, input swagger.json and output folder to suit your environment and needs.
    ```
@@ -49,3 +61,11 @@ Switch out the path to the jar, input swagger.json and output folder to suit you
 7. Change the API base path in `/frontend/corona_tracker/corona-api/lib/api_client.dart` to `https://api.coronatrackerapp.org/api/v1`
 
 Source of these instructions: https://github.com/juliusspencer/Flutter-OpenAPI-Pattern
+
+## Updating icons
+
+Update icon at `assets/icon/icon.png` and run
+
+```
+flutter pub run flutter_launcher_icons:main
+```

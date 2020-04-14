@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.beat-virus</groupId>
+  <artifactId>corona-tracker.frontend</artifactId>
+  <version>0.1.0</version>
+  <name>Corona Tracker Frontend</name>
+  <description>Flutter App for Corona Tracker</description>
+
+  <packaging>jar</packaging>
+
+  <properties>
+    <openapi-generator.version>4.3.0</openapi-generator.version>
+    <maven-yaml2json-plugin.version>0.0.4</maven-yaml2json-plugin.version>
+    <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.github.ngeor</groupId>
+      <artifactId>yak4j-json-yaml-converter-maven-plugin</artifactId>
+      <version>${maven-yaml2json-plugin.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openapitools</groupId>
+      <artifactId>openapi-generator-maven-plugin</artifactId>
+      <version>${openapi-generator.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.ngeor</groupId>
+        <artifactId>yak4j-json-yaml-converter-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>yaml2json</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>yaml2json</goal>
+            </goals>
+            <configuration>
+              <sourceDirectory>../../backend/corona-server/src/main/resources/api/</sourceDirectory>
+              <includes>
+                <include>*.yaml</include>
+              </includes>
+              <outputDirectory>target/api/json</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>target/api/json/openapi.json</inputSpec>
+              <generatorName>dart</generatorName>
+              <configurationFile>flutter.config.json</configurationFile>
+              <output>corona-api</output>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

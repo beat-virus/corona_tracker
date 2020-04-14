@@ -19,9 +19,29 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Adding further files</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Access to your schedule</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Using contacts you know</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Tracking of used location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Tracking of used location</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Tracking of used location</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Accessibility</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -41,7 +61,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSContactsUsageDescription</key>
-    <string>This app requires contacts access to function properly.</string>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>
