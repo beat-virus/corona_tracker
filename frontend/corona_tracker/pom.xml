@@ -43,7 +43,7 @@
               <goal>yaml2json</goal>
             </goals>
             <configuration>
-              <sourceDirectory>../../backend/corona-server/src/main/resources/api/</sourceDirectory>
+              <sourceDirectory>../../api/src/main/resources/openapi/</sourceDirectory>
               <includes>
                 <include>*.yaml</include>
               </includes>
@@ -62,9 +62,9 @@
               <goal>generate</goal>
             </goals>
             <configuration>
-              <inputSpec>target/api/json/openapi.json</inputSpec>
+              <inputSpec>${project.basedir}/target/api/json/openapi.json</inputSpec>
               <generatorName>dart</generatorName>
-              <configurationFile>flutter.config.json</configurationFile>
+              <configurationFile>${project.basedir}/flutter.config.json</configurationFile>
               <output>corona-api</output>
             </configuration>
           </execution>

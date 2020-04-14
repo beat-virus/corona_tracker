@@ -383,12 +383,7 @@ components:
         userId:
           type: string
         medicalState:
-          type: string
-          enum:
-            - UNKNOWN
-            - INFECTED
-            - TREATMENT
-            - CURED
+          $ref: '#/components/schemas/MedicalStateEnum'
         time:
           type: string
           description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
@@ -433,6 +428,14 @@ components:
           type: number
         endLon:
           type: number
+
+    MedicalStateEnum:
+      type: string
+      enum:
+        - UNKNOWN
+        - INFECTED
+        - TREATMENT
+        - CURED
 
   securitySchemes:
     basicAuth:

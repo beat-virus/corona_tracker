@@ -42,6 +42,8 @@ class ApiClient {
           return Friend.fromJson(value);
         case 'HealthDataSet':
           return HealthDataSet.fromJson(value);
+        case 'MedicalStateEnum':
+          return new MedicalStateEnumTypeTransformer().decode(value);
         case 'Position':
           return Position.fromJson(value);
         case 'ReportTrips':

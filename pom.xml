@@ -12,6 +12,7 @@
         <mapstruct.version>1.3.1.Final</mapstruct.version>
         <lombok.version>1.18.10</lombok.version>
         <!-- Maven Plugins -->
+        <maven.assembly.plugin.version>3.2.0</maven.assembly.plugin.version>
         <plugin.swagger-codegen-maven.version>3.0.13</plugin.swagger-codegen-maven.version>
         <plugin.gitflow-maven.version>1.10.0</plugin.gitflow-maven.version>
         <owasp-dependency-check.version>5.1.0</owasp-dependency-check.version>
@@ -31,6 +32,7 @@
     <name>Corona Tracker Services</name>
     <modules>
         <module>api</module>
+        <module>frontend/corona_tracker</module>
         <module>backend</module>
     </modules>
 

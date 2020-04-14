@@ -16,6 +16,7 @@ part 'api/default_api.dart';
 
 part 'model/friend.dart';
 part 'model/health_data_set.dart';
+part 'model/medical_state_enum.dart';
 part 'model/position.dart';
 part 'model/report_trips.dart';
 part 'model/temp_measurement.dart';

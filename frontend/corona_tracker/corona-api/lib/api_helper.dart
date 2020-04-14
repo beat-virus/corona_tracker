@@ -38,6 +38,8 @@ String parameterToString(dynamic value) {
     return '';
   } else if (value is DateTime) {
     return value.toUtc().toIso8601String();
+  } else if (value is MedicalStateEnum) {
+    return MedicalStateEnumTypeTransformer().encode(value).toString();
   } else {
     return value.toString();
   }

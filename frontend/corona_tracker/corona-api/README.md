@@ -61,29 +61,30 @@ All URIs are relative to *http://localhost/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**addFriend**](doc\/DefaultApi.md#addfriend) | **POST** /users/{id}/friends | Add users friends
-*DefaultApi* | [**createBodyTempMeasurement**](doc\/DefaultApi.md#createbodytempmeasurement) | **POST** /measurement/bodytemp | Add a plague body temp measurement
-*DefaultApi* | [**createDataSet**](doc\/DefaultApi.md#createdataset) | **POST** /healthDataSet | Add a health dataset
-*DefaultApi* | [**createPosition**](doc\/DefaultApi.md#createposition) | **POST** /positions | Create new location entry
-*DefaultApi* | [**createUser**](doc\/DefaultApi.md#createuser) | **POST** /users | Create a User
-*DefaultApi* | [**deleteUser**](doc\/DefaultApi.md#deleteuser) | **DELETE** /users/{id} | Delete a User TODO move to /users/id
-*DefaultApi* | [**getBodyTempMeasurements**](doc\/DefaultApi.md#getbodytempmeasurements) | **GET** /measurement/bodytemp | Fetch a list of body temp measurements
-*DefaultApi* | [**getFriends**](doc\/DefaultApi.md#getfriends) | **GET** /users/{id}/friends | Get users friends
-*DefaultApi* | [**getLocations**](doc\/DefaultApi.md#getlocations) | **GET** /reports/locations | Fetch a list of  within the time period for the Device
-*DefaultApi* | [**getPositions**](doc\/DefaultApi.md#getpositions) | **GET** /positions | Fetches a list of Positions
-*DefaultApi* | [**getUser**](doc\/DefaultApi.md#getuser) | **GET** /users/{id} | Get a single users
-*DefaultApi* | [**getUsers**](doc\/DefaultApi.md#getusers) | **GET** /users | Fetch a list of Users
-*DefaultApi* | [**uploadFriends**](doc\/DefaultApi.md#uploadfriends) | **PUT** /users/{id}/friends | Upload users friends
+*DefaultApi* | [**addFriend**](doc//DefaultApi.md#addfriend) | **POST** /users/{id}/friends | Add users friends
+*DefaultApi* | [**createBodyTempMeasurement**](doc//DefaultApi.md#createbodytempmeasurement) | **POST** /measurement/bodytemp | Add a plague body temp measurement
+*DefaultApi* | [**createDataSet**](doc//DefaultApi.md#createdataset) | **POST** /healthDataSet | Add a health dataset
+*DefaultApi* | [**createPosition**](doc//DefaultApi.md#createposition) | **POST** /positions | Create new location entry
+*DefaultApi* | [**createUser**](doc//DefaultApi.md#createuser) | **POST** /users | Create a User
+*DefaultApi* | [**deleteUser**](doc//DefaultApi.md#deleteuser) | **DELETE** /users/{id} | Delete a User TODO move to /users/id
+*DefaultApi* | [**getBodyTempMeasurements**](doc//DefaultApi.md#getbodytempmeasurements) | **GET** /measurement/bodytemp | Fetch a list of body temp measurements
+*DefaultApi* | [**getFriends**](doc//DefaultApi.md#getfriends) | **GET** /users/{id}/friends | Get users friends
+*DefaultApi* | [**getLocations**](doc//DefaultApi.md#getlocations) | **GET** /reports/locations | Fetch a list of  within the time period for the Device
+*DefaultApi* | [**getPositions**](doc//DefaultApi.md#getpositions) | **GET** /positions | Fetches a list of Positions
+*DefaultApi* | [**getUser**](doc//DefaultApi.md#getuser) | **GET** /users/{id} | Get a single users
+*DefaultApi* | [**getUsers**](doc//DefaultApi.md#getusers) | **GET** /users | Fetch a list of Users
+*DefaultApi* | [**uploadFriends**](doc//DefaultApi.md#uploadfriends) | **PUT** /users/{id}/friends | Upload users friends
 
 
 ## Documentation For Models
 
- - [Friend](doc\/Friend.md)
- - [HealthDataSet](doc\/HealthDataSet.md)
- - [Position](doc\/Position.md)
- - [ReportTrips](doc\/ReportTrips.md)
- - [TempMeasurement](doc\/TempMeasurement.md)
- - [User](doc\/User.md)
+ - [Friend](doc//Friend.md)
+ - [HealthDataSet](doc//HealthDataSet.md)
+ - [MedicalStateEnum](doc//MedicalStateEnum.md)
+ - [Position](doc//Position.md)
+ - [ReportTrips](doc//ReportTrips.md)
+ - [TempMeasurement](doc//TempMeasurement.md)
+ - [User](doc//User.md)
 
 
 ## Documentation For Authorization

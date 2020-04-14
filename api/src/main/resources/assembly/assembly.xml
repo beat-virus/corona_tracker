@@ -6,7 +6,7 @@
   <includeBaseDirectory>false</includeBaseDirectory>
   <fileSets>
     <fileSet>
-      <directory>src/main/openapi</directory>
+      <directory>src/main/resources/openapi</directory>
       <outputDirectory></outputDirectory>
     </fileSet>
   </fileSets>
