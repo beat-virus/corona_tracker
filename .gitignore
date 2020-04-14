@@ -27,6 +27,10 @@ target/
 /.nb-gradle/
 build/
 
+# System Files
+.DS_Store
+Thumbs.db
+
 ### VS Code ###
 .vscode/
 frontend/corona_tracker/android/app/src/main/AndroidManifest.xml

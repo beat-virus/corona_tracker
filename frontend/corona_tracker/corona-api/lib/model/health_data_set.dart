@@ -1,12 +1,10 @@
 part of openapi.api;
 
-enum MedicalStateEnum {  UNKNOWN,  INFECTED,  TREATMENT,  CURED,  }
-
 class HealthDataSet {
   
   String userId = null;
   
-  String medicalState = null;
+  MedicalStateEnum medicalState = null;
   //enum medicalStateEnum {  UNKNOWN,  INFECTED,  TREATMENT,  CURED,  };{
   /* in IS0 8601 format. eg. `1963-11-22T18:30:00Z` */
   DateTime time = null;
@@ -20,7 +18,9 @@ class HealthDataSet {
   HealthDataSet.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     userId = json['userId'];
-    medicalState = json['medicalState'];
+    medicalState = (json['medicalState'] == null) ?
+      null :
+      MedicalStateEnum.fromJson(json['medicalState']);
     time = (json['time'] == null) ?
       null :
       DateTime.parse(json['time']);
