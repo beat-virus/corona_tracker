@@ -9,12 +9,12 @@ cd backend && docker-compose up -d
 ```
 And start backend
 ```
-(mvn clean install && cd corona-server && mvn spring-boot:run)
+(mvn clean install && mvn spring-boot:run)
 ```
 
 To run local with prod config, e.g. for testing API AUTH:
 ```
-( mvn clean install && cd corona-server && \
+( mvn clean install && \
     DB_SERVER=localhost \
     DB_NAME=corona DB_USER=corona \
     DB_PASSWORD=password \
@@ -37,15 +37,14 @@ If `spring-boot` doesn't work (`No plugin found for prefix 'spring-boot'`), try 
 
 ```
 mvn clean install
-java -jar .//corona-server/target/wvsvcoronatracker-0.0.1-SNAPSHOT-server.jar
+java -jar target/wvsvcoronatracker-0.0.1-SNAPSHOT-server.jar
 ```
 
 To connect to prod db use:
 ```
-cd corona-server && \
-    DB_URL=corona-tracker-dev.postgres.database.azure.com \
-    DB_NAME=postgres \
-    DB_USER=... \
-    DB_PASSWORD=... \ 
-    spring_profiles_active=prod mvn spring-boot:run
+DB_URL=corona-tracker-dev.postgres.database.azure.com \
+DB_NAME=postgres \
+DB_USER=... \
+DB_PASSWORD=... \
+spring_profiles_active=prod mvn spring-boot:run
 ```

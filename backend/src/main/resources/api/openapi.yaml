@@ -1,0 +1,441 @@
+openapi: 3.0.1
+info:
+  title: Corona Tracker API
+  version: "0.1"
+servers:
+  - url: http://localhost/api/v1
+security:
+  - basicAuth: []
+paths:
+  /positions:
+    get:
+      summary: Fetches a list of Positions
+      operationId: getPositions
+      description: Without any params, it returns a list of last known positions for
+        all the user's Devices. _from_ and _to_ fields are not required with _id_
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: string
+        - name: from
+          in: query
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          schema:
+            type: string
+            format: date-time
+        - name: id
+          in: query
+          description: To fetch one or more positions. Multiple params can be passed
+            like `id=31&id=42`
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+            application/gpx+xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+    post:
+      summary: Create new location entry
+      operationId: createPosition
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Position'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Position'
+            application/gpx+xml:
+              schema:
+                $ref: '#/components/schemas/Position'
+
+  /users:
+    get:
+      summary: Fetch a list of Users
+      operationId: getUsers
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        400:
+          description: No Permission
+          content: {}
+    post:
+      summary: Create a User
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /users/{id}:
+    get:
+      summary: Get a single users
+      operationId: getUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: No Permission
+          content: {}
+    delete:
+      summary: Delete a User TODO move to /users/id
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: No Content
+          content: {}
+
+  /users/{id}/friends:
+    put:
+      summary: Upload users friends
+      operationId: uploadFriends
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Friend'
+        required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: No Permission
+          content: {}
+    post:
+      summary: Add users friends
+      operationId: addFriend
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Friend'
+        required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: No Permission
+          content: {}
+    get:
+      summary: Get users friends
+      operationId: getFriends
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Friend'
+        400:
+          description: No Permission
+          content: {}
+
+  /reports/locations:
+    get:
+      summary: Fetch a list of  within the time period for the Device
+      description: At least one userId must be passed
+      operationId: getLocations
+      parameters:
+        - name: deviceId
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: from
+          in: query
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReportTrips'
+
+  /measurement/bodytemp:
+    get:
+      summary: Fetch a list of body temp measurements
+      operationId: getBodyTempMeasurements
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TempMeasurement'
+        400:
+          description: No Permission
+          content: {}
+    post:
+      summary: Add a plague body temp measurement
+      operationId: createBodyTempMeasurement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TempMeasurement'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TempMeasurement'
+
+  /healthDataSet:
+    post:
+      summary: Add a health dataset
+      operationId: createDataSet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HealthDataSet'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthDataSet'
+
+components:
+  schemas:
+    Position:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        time:
+          type: string
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
+        latitude:
+          type: number
+        longitude:
+          type: number
+        altitude:
+          type: number
+        accuracy:
+          type: integer
+          description: Position accuracy in meters (radius), lower is better
+    User:
+      type: object
+      required:
+        - token
+        - phoneHash
+      properties:
+        token:
+          type: string
+        phoneHash:
+          type: string
+        healthHistory:
+          type: array
+          items:
+            $ref: '#/components/schemas/HealthDataSet'
+
+    Friend:
+      type: object
+      required:
+        - phoneHash
+      properties:
+        id:
+          type: string
+        phoneHash:
+          type: string
+
+    TempMeasurement:
+      type: object
+      required:
+        - time
+        - userId
+        - value
+      properties:
+        time:
+          type: string
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
+        userId:
+          type: string
+        value:
+          description: 'temp value, caution: is multiplied *100. E.g. 38.02°C gets 3802 here!'
+          type: integer
+    HealthDataSet:
+      type: object
+      required:
+        - medicalState
+        - userId
+      properties:
+        userId:
+          type: string
+        medicalState:
+          type: string
+          enum:
+            - UNKNOWN
+            - INFECTED
+            - TREATMENT
+            - CURED
+        time:
+          type: string
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
+
+    ReportTrips:
+      type: object
+      properties:
+        deviceName:
+          type: string
+        maxSpeed:
+          type: number
+          description: in knots
+        averageSpeed:
+          type: number
+          description: in knots
+        distance:
+          type: number
+          description: in meters
+        spentFuel:
+          type: number
+          description: in liters
+        duration:
+          type: integer
+        startTime:
+          type: string
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
+        startAddress:
+          type: string
+        startLat:
+          type: number
+        startLon:
+          type: number
+        endTime:
+          type: string
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
+        endAddress:
+          type: string
+        endLat:
+          type: number
+        endLon:
+          type: number
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      description: Basic HTTP authorization with _email_ and _password_
+      scheme: basic
